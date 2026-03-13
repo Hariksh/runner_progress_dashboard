@@ -1,36 +1,50 @@
 import React from 'react';
-import { Trophy } from 'lucide-react';
+import { Trophy, ArrowUpRight } from 'lucide-react';
 
 const LeaderboardCard = () => {
   return (
     <div className="card">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Trophy size={20} className="text-green" />
-          <h3 style={{ fontSize: '1rem' }}>Leaderboard Snapshot</h3>
-        </div>
-        <a href="#" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--primary)', textDecoration: 'none' }}>View All</a>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+        <Trophy size={20} className="text-green" />
+        <h3 style={{ fontSize: '1rem', margin: 0 }}>Leaderboard Snapshot</h3>
       </div>
       
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-        <span style={{ fontSize: '2rem', fontWeight: 800 }} className="text-green">#18</span>
-        <span className="text-muted" style={{ fontSize: '0.875rem', fontWeight: 600 }}>Your Rank</span>
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+        <p className="text-muted" style={{ fontSize: '0.875rem', fontWeight: 600, textTransform: 'uppercase', marginBottom: '4px' }}>YOUR RANK</p>
+        <p className="text-green" style={{ fontSize: '3rem', fontWeight: 800, lineHeight: 1 }}>#18</p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '16px', backgroundColor: '#F8FAFC', borderRadius: '12px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '16px', backgroundColor: '#F9FAFB', borderRadius: '12px', marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
-          <span className="text-muted">Top Runner</span>
+          <span className="text-muted">Top Distance</span>
           <span style={{ fontWeight: 700 }}>124 KM</span>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
-          <span className="text-muted">Next Rank in</span>
-          <span style={{ fontWeight: 700 }}>3 KM</span>
+          <span className="text-muted">Next Rank</span>
+          <span style={{ fontWeight: 700 }}>+3 KM</span>
         </div>
       </div>
 
-      <p style={{ fontSize: '0.875rem', fontWeight: 500, textAlign: 'center' }}>
-        "Run <span className="text-green" style={{ fontWeight: 700 }}>3 KM</span> more to reach Rank #17"
+      <p style={{ fontSize: '0.875rem', fontWeight: 500, textAlign: 'center', marginBottom: '16px', color: '#374151' }}>
+        Run <span className="text-green" style={{ fontWeight: 700 }}>3 KM</span> more to reach Rank #17
       </p>
+
+      <a href="#" style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        gap: '4px', 
+        fontSize: '0.875rem', 
+        fontWeight: 600, 
+        color: 'var(--primary)', 
+        textDecoration: 'none',
+        padding: '10px',
+        borderRadius: '8px',
+        border: '1px solid #DCFCE7',
+        transition: 'background 0.2s'
+      }}>
+        View Leaderboard <ArrowUpRight size={16} />
+      </a>
     </div>
   );
 };

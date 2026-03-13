@@ -4,11 +4,12 @@
   --primary: #22C55E;
   --bg-color: #F5F7FB;
   --card-bg: #FFFFFF;
-  --text-main: #1E293B;
-  --text-muted: #64748B;
-  --radius: 16px;
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --text-main: #111827;
+  --text-muted: #6B7280;
+  --radius: 12px;
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --container-width: 1280px;
 }
 
 * {
@@ -23,7 +24,6 @@ body {
   color: var(--text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -32,24 +32,66 @@ body {
   flex-direction: column;
 }
 
-.dashboard-container {
+/* Header */
+.top-header {
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px 20px 100px 20px;
+  height: 64px;
+  background: var(--card-bg);
+  border-bottom: 1px solid #E5E7EB;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Desktop Grid Layout */
+.desktop-dashboard {
+  max-width: var(--container-width);
+  margin: 32px auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  width: 100%;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Cards */
 .card {
   background-color: var(--card-bg);
   border-radius: var(--radius);
   padding: 24px;
   box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
 }
 
 .badge {
@@ -60,94 +102,69 @@ body {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  display: inline-flex;
-  width: fit-content;
 }
 
-h1, h2, h3 {
+h3 {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
+  margin-bottom: 16px;
 }
 
-.text-green {
-  color: var(--primary);
+.text-green { color: var(--primary); }
+.text-muted { color: var(--text-muted); }
+
+/* Animations */
+@keyframes fillCircle {
+  from { stroke-dashoffset: 314.159; }
 }
 
-.text-muted {
-  color: var(--text-muted);
+@keyframes fillLine {
+  from { width: 0; }
 }
 
-/* Custom styles for progress and charts */
-.progress-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+.animate-fill {
+  animation: fillCircle 1.5s ease-out forwards;
 }
 
-.progress-circle {
-  position: relative;
-  width: 120px;
-  height: 120px;
+.animate-line {
+  animation: fillLine 1s ease-out forwards;
 }
 
-.progress-bar-horizontal {
-  width: 100%;
-  height: 8px;
-  background-color: #E2E8F0;
-  border-radius: 999px;
-  overflow: hidden;
+/* Tooltip */
+.tooltip-trigger:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
 
-.progress-bar-fill {
-  height: 100%;
-  background-color: var(--primary);
-  border-radius: 999px;
-}
-
-.bottom-nav {
-  position: fixed;
-  bottom: 24px;
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  background: #111827;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 460px;
-  background-color: #1E293B;
-  border-radius: 24px;
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: var(--shadow-lg);
-  z-index: 1000;
+  margin-bottom: 8px;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  z-index: 10;
 }
 
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: #94A3B8;
-  font-size: 0.7rem;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.nav-item.active {
-  color: var(--primary);
-}
-
-.avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+/* Specific UI Elements */
+.avatar-container {
   position: relative;
+  width: 56px;
+  height: 56px;
 }
 
 .status-indicator {
   position: absolute;
-  bottom: 4px;
-  right: 4px;
+  bottom: 2px;
+  right: 2px;
   width: 12px;
   height: 12px;
   background-color: var(--primary);
