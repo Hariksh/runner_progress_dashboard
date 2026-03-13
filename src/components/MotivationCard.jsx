@@ -1,19 +1,32 @@
 import React from 'react';
+import { Sparkles } from 'lucide-react';
 
 const MotivationCard = ({ progress = 62 }) => {
-  let message = "🔥 You’re over halfway there! Keep pushing toward the finish line. Every step counts.";
+  let message = "You're consistently outperforming expectations. Maintain this momentum to reach the finish line as a top contender.";
   
   if (progress < 30) {
-    message = "Great start! Keep going! Every step counts toward your goal. 🏃";
+    message = "Outstanding start to the challenge. Every kilometer tracked is a step closer to your season goals.";
   } else if (progress > 90) {
-    message = "Almost finished! Push to the finish line! You're so close to victory. 🏁";
+    message = "Peak performance achieved. You are in the final sprint of the challenge. Finish strong and claim your rank.";
   }
 
   return (
-    <div className="card" style={{ backgroundColor: '#DCFCE7', border: 'none', textAlign: 'center' }}>
-      <p style={{ fontSize: '0.95rem', fontWeight: 600, color: '#166534', lineHeight: 1.6 }}>
-        {message}
-      </p>
+    <div className="card" style={{ 
+      background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)', 
+      border: 'none', 
+      color: 'white',
+      padding: '24px'
+    }}>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+        <div style={{ padding: '8px', borderRadius: '8px', background: 'rgba(255,255,255,0.2)' }}>
+          <Sparkles size={20} color="white" />
+        </div>
+        <div>
+          <p style={{ fontSize: '0.9rem', fontWeight: 600, lineHeight: 1.5, color: 'rgba(255,255,255,0.95)' }}>
+            {message}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

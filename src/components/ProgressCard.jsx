@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Target, CheckCircle2, Clock } from 'lucide-react';
 
 const ProgressCard = () => {
   const target = 100;
@@ -7,10 +8,9 @@ const ProgressCard = () => {
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
-    // Smooth animation from 0 to 62
     const timer = setTimeout(() => {
       setPercentage(62);
-    }, 100);
+    }, 200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -20,62 +20,86 @@ const ProgressCard = () => {
 
   return (
     <div className="card">
-      <h3 style={{ fontSize: '1.25rem' }}>Progress Overview</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        <h3 style={{ margin: 0 }}>Progress Analysis</h3>
+        <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+          Updated 2 mins ago
+        </span>
+      </div>
       
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px', padding: '20px 0' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'min-content 1fr', gap: '48px', alignItems: 'center' }}>
         {/* Animated Circular Progress */}
-        <div className="progress-circle" style={{ width: '180px', height: '180px' }}>
-          <svg width="180" height="180" viewBox="0 0 120 120">
-            <circle cx="60" cy="60" r={radius} fill="transparent" stroke="#F1F5F9" strokeWidth="8" />
+        <div style={{ position: 'relative', width: '200px', height: '200px' }}>
+          <svg width="200" height="200" viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style={{ stopColor: 'var(--primary)', stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: '#4ADE80', stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r={radius} fill="transparent" stroke="#F1F5F9" strokeWidth="6" />
             <circle
               cx="60"
               cy="60"
               r={radius}
               fill="transparent"
-              stroke="var(--primary)"
-              strokeWidth="8"
+              stroke="url(#progressGradient)"
+              strokeWidth="10"
               strokeDasharray={circumference}
               strokeDashoffset={offset}
               strokeLinecap="round"
-              className="animate-fill"
               transform="rotate(-90 60 60)"
-              style={{ transition: 'stroke-dashoffset 1.5s ease-out' }}
+              style={{ transition: 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
             />
-            <text x="60" y="60" textAnchor="middle" dominantBaseline="middle" style={{ fontWeight: 800, fontSize: '1.5rem', fill: 'var(--text-main)', fontFamily: 'Poppins' }}>
-              {Math.round(percentage)}%
-            </text>
           </svg>
-        </div>
-
-        {/* Animated Horizontal Progress with Tooltip */}
-        <div style={{ width: '100%', position: 'relative' }} className="tooltip-trigger">
-          <div className="tooltip">Completed: {completed} KM | Remaining: {remaining} KM</div>
-          <div style={{ height: '12px', background: '#F1F5F9', borderRadius: '99px', overflow: 'hidden' }}>
-            <div 
-              className="animate-line" 
-              style={{ 
-                height: '100%', 
-                background: 'var(--primary)', 
-                width: `${percentage}%`,
-                transition: 'width 1s ease-out'
-              }} 
-            />
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '12px', fontSize: '0.875rem', fontWeight: 600 }} className="text-muted">
-            <span>0 KM</span>
-            <span>Target {target} KM</span>
+          <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
+            <p style={{ fontSize: '2.5rem', fontWeight: 800, lineHeight: 1, letterSpacing: '-0.025em' }}>
+              {Math.round(percentage)}<span style={{ fontSize: '1.25rem', verticalAlign: 'top', fontWeight: 600 }}>%</span>
+            </p>
+            <p className="text-muted" style={{ fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', marginTop: '4px' }}>Complete</p>
           </div>
         </div>
 
-        {/* Metrics Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '100%', gap: '24px', paddingTop: '24px', borderTop: '1px solid #F1F5F9' }}>
+        {/* Detailed Metrics */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           <div>
-            <p className="text-muted" style={{ fontSize: '0.875rem', fontWeight: 600, marginBottom: '4px' }}>COMPLETED</p>
-            <p className="text-green" style={{ fontSize: '1.75rem', fontWeight: 800 }}>{completed} KM</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--primary)' }}></div>
+              <p style={{ fontSize: '0.85rem', fontWeight: 600 }} className="text-muted">CURRENT JOURNEY</p>
+            </div>
+            <div style={{ position: 'relative' }} className="tooltip-trigger">
+              <div className="tooltip">Analysis: {completed}km of {target}km goal finished</div>
+              <div className="progress-track">
+                <div 
+                  className="progress-fill" 
+                  style={{ 
+                    width: `${percentage}%`,
+                    transition: 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)'
+                  }} 
+                />
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '12px', fontSize: '0.8rem', fontWeight: 600 }} className="text-muted">
+                <span>0 KM</span>
+                <span className="text-main">TARGET {target} KM</span>
+              </div>
+            </div>
           </div>
-          <div style={{ textAlign: 'right' }}>
-            <p className="text-muted" style={{ fontSize: '0.875rem', fontWeight: 600, marginBottom: '4px' }}>REMAINING</p>
-            <p style={{ fontSize: '1.75rem', fontWeight: 800 }}>{remaining} KM</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            <div style={{ padding: '16px', borderRadius: '12px', background: 'var(--primary-light)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <CheckCircle2 size={16} className="text-green" />
+                <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--primary-dark)', textTransform: 'uppercase' }}>Finished</span>
+              </div>
+              <p style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary-dark)' }}>{completed}km</p>
+            </div>
+            <div style={{ padding: '16px', borderRadius: '12px', background: '#F8FAFC', border: '1px solid var(--border-color)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <Clock size={16} className="text-muted" />
+                <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>To Go</span>
+              </div>
+              <p style={{ fontSize: '1.5rem', fontWeight: 800 }}>{remaining}km</p>
+            </div>
           </div>
         </div>
       </div>

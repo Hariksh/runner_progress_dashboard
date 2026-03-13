@@ -4,19 +4,30 @@ import runnerAvatar from '../assets/runner_avatar.png';
 const ProfileCard = () => {
   return (
     <div className="card">
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '16px' }}>
-        <div className="avatar-container">
-          <img 
-            src={runnerAvatar} 
-            alt="Rahul Sharma" 
-            style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '3px solid #F1F5F9' }} 
-          />
-          <div className="status-indicator"></div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+        <div style={{ position: 'relative', marginBottom: '24px' }}>
+          <div className="avatar-profile">
+            <img src={runnerAvatar} alt="Rahul Sharma" />
+          </div>
+          <div className="status-dot"></div>
         </div>
         <div>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '4px' }}>Rahul Sharma</h3>
-          <p className="text-muted" style={{ fontSize: '0.875rem', marginBottom: '12px' }}>IRL Season 1</p>
-          <span className="badge">RoadWarrior</span>
+          <h3 style={{ fontSize: '1.25rem', marginBottom: '8px', letterSpacing: '-0.01em' }}>Rahul Sharma</h3>
+          <p className="text-muted" style={{ fontSize: '0.9rem', fontWeight: 500, marginBottom: '20px' }}>IRL Season 1 Athlete</p>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <span className="badge">RoadWarrior</span>
+          </div>
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '100%', gap: '16px', marginTop: '32px', paddingTop: '24px', borderTop: '1px solid var(--border-color)' }}>
+          <div>
+            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Rank</p>
+            <p style={{ fontSize: '1.1rem', fontWeight: 800 }}>#18</p>
+          </div>
+          <div style={{ borderLeft: '1px solid var(--border-color)' }}>
+            <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Tier</p>
+            <p style={{ fontSize: '1.1rem', fontWeight: 800 }}>Pro</p>
+          </div>
         </div>
       </div>
     </div>
