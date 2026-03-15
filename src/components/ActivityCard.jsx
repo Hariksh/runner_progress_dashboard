@@ -2,15 +2,17 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, Tooltip } from 'recharts';
 import { TrendingUp } from 'lucide-react';
 
-const data = [
-  { day: 'Mon', distance: 5 },
-  { day: 'Tue', distance: 8 },
-  { day: 'Wed', distance: 0 },
-  { day: 'Thu', distance: 6 },
-  { day: 'Fri', distance: 7 },
-];
+const ActivityCard = ({ weeklyRuns = [0,0,0,0,0] }) => {
+  const data = [
+    { day: 'Mon', distance: weeklyRuns[0] || 0 },
+    { day: 'Tue', distance: weeklyRuns[1] || 0 },
+    { day: 'Wed', distance: weeklyRuns[2] || 0 },
+    { day: 'Thu', distance: weeklyRuns[3] || 0 },
+    { day: 'Fri', distance: weeklyRuns[4] || 0 },
+  ];
+  
+  const avg = (weeklyRuns.reduce((a, b) => a + (b || 0), 0) / 5).toFixed(1);
 
-const ActivityCard = () => {
   return (
     <div className="card">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
@@ -70,7 +72,7 @@ const ActivityCard = () => {
 
       <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px' }}>
         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          Average Performance: <span style={{ color: 'var(--text-main)', fontWeight: 700 }}>6.5 km/day</span>
+          Average Performance: <span style={{ color: 'var(--text-main)', fontWeight: 700 }}>{avg} km/day</span>
         </p>
       </div>
     </div>

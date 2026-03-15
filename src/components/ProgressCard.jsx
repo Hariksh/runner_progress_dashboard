@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Target, CheckCircle2, Clock } from 'lucide-react';
 
-const ProgressCard = () => {
-  const target = 100;
-  const completed = 62;
-  const remaining = 38;
+const ProgressCard = ({ target = 100, completed = 0 }) => {
+  const remaining = target - completed;
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setPercentage(62);
+      setPercentage(target > 0 ? (completed / target) * 100 : 0);
     }, 200);
     return () => clearTimeout(timer);
   }, []);

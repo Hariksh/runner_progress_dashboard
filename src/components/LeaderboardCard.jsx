@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trophy, ChevronRight, Crown } from 'lucide-react';
 
-const LeaderboardCard = () => {
+const LeaderboardCard = ({ runnerRank = 0 }) => {
   return (
     <div className="card">
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
@@ -14,7 +14,7 @@ const LeaderboardCard = () => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px', marginBottom: '32px' }}>
         <p className="text-muted" style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Current Position</p>
         <div style={{ fontSize: '3.5rem', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.05em', color: 'var(--text-main)', display: 'flex', alignItems: 'baseline' }}>
-          <span className="text-green">#</span>18
+          <span className="text-green">#</span>{runnerRank}
         </div>
       </div>
 
