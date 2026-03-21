@@ -47,7 +47,6 @@ const DataEditor = ({ data, onSave, onClose }) => {
         </div>
 
         <div style={{ display: 'grid', gap: '20px' }}>
-          {/* Personal Info */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div>
               <label style={labelStyle}>Runner Name</label>
@@ -70,7 +69,6 @@ const DataEditor = ({ data, onSave, onClose }) => {
             </div>
           </div>
 
-          {/* Progress */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div>
               <label style={labelStyle}>Target Distance (KM)</label>
@@ -82,7 +80,6 @@ const DataEditor = ({ data, onSave, onClose }) => {
             </div>
           </div>
 
-          {/* Weekly Runs */}
           <div>
             <label style={labelStyle}>Weekly Runs (Mon - Fri)</label>
             <div style={{ display: 'flex', gap: '8px' }}>

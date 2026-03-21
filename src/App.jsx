@@ -33,13 +33,11 @@ function App() {
       <Header runner={data.runner} tier={data.tier} />
       
       <main className="desktop-dashboard">
-        {/* Main Content Column */}
         <section className="main-content">
           <ProgressCard target={data.target_distance} completed={data.completed_distance} />
           <ActivityCard weeklyRuns={data.weekly_runs} />
         </section>
 
-        {/* Sidebar Column */}
         <aside className="sidebar">
           <ProfileCard runner={data.runner} challenge={data.challenge} tier={data.tier} rank={data.rank} />
           <LeaderboardCard runnerRank={data.rank} />
@@ -47,7 +45,6 @@ function App() {
         </aside>
       </main>
 
-      {/* Floating Action Button for Editing Data */}
       <button 
         onClick={() => setIsEditing(true)}
         style={{

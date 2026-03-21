@@ -57,7 +57,6 @@ const LeaderboardCard = ({ runnerRank = 0 }) => {
   );
 };
 
-// Helper for icon since TrendingUp is in Lucide
 const TrendingUpIcon = ({ size, className }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>

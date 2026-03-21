@@ -10,7 +10,7 @@ const ProgressCard = ({ target = 100, completed = 0 }) => {
       setPercentage(target > 0 ? (completed / target) * 100 : 0);
     }, 200);
     return () => clearTimeout(timer);
-  }, []);
+  }, [target, completed]);
 
   const radius = 50;
   const circumference = 2 * Math.PI * radius;
@@ -26,7 +26,6 @@ const ProgressCard = ({ target = 100, completed = 0 }) => {
       </div>
       
       <div style={{ display: 'grid', gridTemplateColumns: 'min-content 1fr', gap: '48px', alignItems: 'center' }}>
-        {/* Animated Circular Progress */}
         <div style={{ position: 'relative', width: '200px', height: '200px' }}>
           <svg width="200" height="200" viewBox="0 0 120 120">
             <defs>
@@ -58,7 +57,6 @@ const ProgressCard = ({ target = 100, completed = 0 }) => {
           </div>
         </div>
 
-        {/* Detailed Metrics */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
